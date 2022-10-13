@@ -1,6 +1,11 @@
 #ifndef DISEMVOWEL_H_GUARD
 #define DISEMVOWEL_H_GUARD
 
-char *disemvowel(char *str);
+struct DisemvowelOutput {
+  int size;
+  char* disemvoweled;
+};
+
+struct DisemvowelOutput disemvowel(char *str);
 
 #endif

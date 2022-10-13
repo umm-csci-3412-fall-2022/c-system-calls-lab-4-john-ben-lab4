@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include "disemvowel.h"
 
 int isVowel(char c) {
@@ -7,7 +8,8 @@ int isVowel(char c) {
   || c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U';
 }
 
-char *disemvowel(char *str) {
+struct DisemvowelOutput disemvowel(char *str) {
+  struct DisemvowelOutput output;
   int consonantCount = 0;
   int strLength = strlen(str);
   for (int i = 0; i < strLength; i++) {
@@ -16,14 +18,17 @@ char *disemvowel(char *str) {
     }
   }
 
-  char *output = (char*)calloc(consonantCount + 1, sizeof(char));
+  char *disemvoweled = (char*)calloc(consonantCount + 1, sizeof(char));
   int consonantPos = 0;
   for (int i = 0; consonantPos < consonantCount; i++) {
     if (!isVowel(str[i])) {
-      output[consonantPos++] = str[i];
+      disemvoweled[consonantPos++] = str[i];
     }
   }
-  output[consonantCount] = '\0';
+  disemvoweled[consonantCount] = '\0';
+
+  output.size = consonantCount;
+  output.disemvoweled = disemvoweled;
 
   return output;
 }
